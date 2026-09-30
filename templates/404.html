@@ -1,0 +1,5 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<section class="panel not-found-panel"><span class="not-found-mark">✳</span><span class="eyebrow">THIS PAGE ISN'T HERE</span><h2>찾으시는 페이지가 없어요.</h2><p>주소를 다시 확인하거나 공부 기록으로 돌아가 주세요.</p><a class="button button-primary" href="{{ url_for('dashboard') if current_user else url_for('login') }}">온결로 돌아가기 <span aria-hidden="true">→</span></a></section>
+{% endblock %}

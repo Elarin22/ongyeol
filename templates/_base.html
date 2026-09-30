@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f3">
+  <meta name="description" content="매일의 공부 시간을 차분히 기록하고 나만의 학습 흐름을 돌아봐요.">
+  <title>{% block title %}{{ page_title or '온결' }} · 온결{% endblock %}</title>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
+</head>
+<body class="{% if not current_user %}auth-body{% else %}app-body{% endif %}" data-reminder-enabled="{{ '1' if current_user and current_user['reminder_enabled'] else '0' }}" data-reminder-time="{{ current_user['reminder_time'] if current_user else '' }}">
+  {% if current_user %}
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="{{ url_for('dashboard') }}" aria-label="온결 대시보드">
+          <span class="brand-symbol" aria-hidden="true">온</span>
+          <span class="brand-copy"><strong>온결<span>.</span></strong><small>STUDY JOURNAL</small></span>
+        </a>
+        <span class="sidebar-label">나의 학습</span>
+        <nav class="main-nav" aria-label="주 메뉴">
+          <a class="nav-link{% if request.endpoint == 'dashboard' %} active{% endif %}" href="{{ url_for('dashboard') }}"><span class="nav-icon" aria-hidden="true">⌂</span><span>오늘의 기록</span></a>
+          <a class="nav-link{% if request.endpoint in ['records', 'new_record', 'edit_record'] %} active{% endif %}" href="{{ url_for('records') }}"><span class="nav-icon" aria-hidden="true">▤</span><span>공부 기록</span></a>
+          <a class="nav-link{% if request.endpoint == 'report' %} active{% endif %}" href="{{ url_for('report') }}"><span class="nav-icon" aria-hidden="true">◷</span><span>주간 리포트</span></a>
+        </nav>
+        <span class="sidebar-label sidebar-label-community">함께 응원해요</span>
+        <nav class="main-nav" aria-label="커뮤니티 메뉴">
+          <a class="nav-link{% if request.endpoint == 'friends' %} active{% endif %}" href="{{ url_for('friends') }}"><span class="nav-icon" aria-hidden="true">♡</span><span>공부 친구</span></a>
+          <a class="nav-link{% if request.endpoint == 'notifications' %} active{% endif %}" href="{{ url_for('notifications') }}"><span class="nav-icon" aria-hidden="true">♧</span><span>알림</span>{% if unread_count %}<span class="nav-badge">{{ unread_count }}</span>{% endif %}</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <a class="nav-link{% if request.endpoint == 'settings' %} active{% endif %}" href="{{ url_for('settings') }}"><span class="nav-icon" aria-hidden="true">⚙</span><span>설정</span></a>
+          <div class="sidebar-user"><span class="avatar">{{ current_user['display_name'][:1] }}</span><span class="user-copy"><strong>{{ current_user['display_name'] }}</strong><small>{{ current_user['email'] }}</small></span><form method="post" action="{{ url_for('logout') }}" aria-label="로그아웃"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="icon-button logout-button" type="submit" title="로그아웃" aria-label="로그아웃">↗</button></form></div>
+          <div class="privacy-note"><span aria-hidden="true">♧</span><p>나의 학습 기록은<br><strong>나에게만 보여요.</strong></p></div>
+        </div>
+      </aside>
+      <div class="sidebar-backdrop" data-sidebar-close></div>
+      <main class="main-content">
+        <header class="topbar"><button class="mobile-menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="sidebar" data-sidebar-toggle><span></span><span></span><span></span></button><div class="topbar-title"><span class="topbar-date">{{ today_iso }}</span><span class="topbar-divider">/</span><span>{{ page_title or '오늘의 기록' }}</span></div><div class="topbar-actions"><a class="topbar-icon" href="{{ url_for('notifications') }}" aria-label="알림"><span aria-hidden="true">♧</span>{% if unread_count %}<i aria-label="읽지 않은 알림 {{ unread_count }}개"></i>{% endif %}</a><a class="topbar-add" href="{{ url_for('new_record') }}"><span aria-hidden="true">＋</span><span>기록 추가</span></a></div></header>
+        <div class="content-wrap">
+          {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-stack" aria-live="polite">{% for category, message in messages %}<div class="flash-message flash-{{ category }}"><span>{{ message }}</span><button type="button" class="flash-dismiss" aria-label="알림 닫기">×</button></div>{% endfor %}</div>{% endif %}{% endwith %}
+          {% block content %}{% endblock %}
+          <footer class="site-footer"><span>ON:GYEOL · STUDY JOURNAL</span><span>오늘의 작은 집중이 내일의 나를 만들어요.</span></footer>
+        </div>
+      </main>
+    </div>
+  {% else %}
+    {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="auth-flash-stack" aria-live="polite">{% for category, message in messages %}<div class="flash-message flash-{{ category }}"><span>{{ message }}</span><button type="button" class="flash-dismiss" aria-label="알림 닫기">×</button></div>{% endfor %}</div>{% endif %}{% endwith %}
+    {% block auth_content %}{% endblock %}
+  {% endif %}
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>

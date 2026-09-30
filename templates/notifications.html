@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="page-stack notifications-page">
+  <section class="notifications-hero panel"><span class="notifications-hero-icon">♧</span><div><span class="eyebrow">LITTLE NOTES FOR YOU</span><h2>반가운 소식을 모았어요.</h2><p>친구 초대와 공부 친구 연결 소식을 이곳에서 확인해요.</p></div><div class="notification-count"><strong>{{ unread }}</strong><span>읽지 않음</span></div></section>
+  <section class="panel notification-list-panel"><div class="panel-heading"><div><span class="eyebrow">YOUR NOTIFICATION BOX</span><h2>알림함</h2><p>소중한 연결의 순간을 돌아봐요.</p></div>{% if unread %}<form method="post" action="{{ url_for('mark_all_notifications_read') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="text-link" type="submit">모두 읽음 처리 ✓</button></form>{% endif %}</div>
+    {% if notifications %}<div class="notification-list">{% for item in notifications %}<article class="notification-row{% if not item['read_at'] %} unread{% endif %}"><span class="notification-row-icon">{% if item['kind'] == 'friend_invite_accepted' %}♡{% else %}✳{% endif %}</span><div class="notification-row-content"><div class="notification-row-title"><strong>{{ item['title'] }}</strong>{% if not item['read_at'] %}<span class="unread-pill">새 알림</span>{% endif %}</div><p>{{ item['body'] }}</p><time datetime="{{ item['created_at'] }}">{{ item['created_at']|replace('T', ' ')|replace('+00:00', ' UTC') }}</time></div>{% if not item['read_at'] %}<form method="post" action="{{ url_for('mark_notification_read', notification_id=item['id']) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="mark-read-button" type="submit">읽음 표시</button></form>{% else %}<span class="notification-read-label">읽음</span>{% endif %}</article>{% endfor %}</div>{% else %}<div class="empty-state notification-empty"><span class="empty-state-icon">♧</span><strong>아직 도착한 알림이 없어요.</strong><p>친구 초대가 수락되면 이곳에서 소식을 확인할 수 있어요.</p></div>{% endif %}
+  </section>
+  <section class="notification-info"><span>♧</span><p><strong>학습 기록은 계속 비공개예요.</strong> 알림에는 친구 연결 소식만 표시됩니다.</p></section>
+</div>
+{% endblock %}

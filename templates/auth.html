@@ -1,0 +1,54 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block auth_content %}
+<main class="auth-screen">
+  <section class="auth-story">
+    <a class="brand auth-brand" href="{{ url_for('login') }}" aria-label="온결 시작 화면">
+      <span class="brand-symbol" aria-hidden="true">온</span>
+      <span class="brand-copy"><strong>온결<span>.</span></strong><small>STUDY JOURNAL</small></span>
+    </a>
+    <div class="auth-story-copy">
+      <span class="auth-kicker"><span aria-hidden="true">✳</span> A GENTLER WAY TO GROW</span>
+      <h1>오늘을 기록하고,<br><em>내일의 나를</em> 만나요.</h1>
+      <p>공부한 시간을 차분히 모아<br>나만의 꾸준함을 발견해 보세요.</p>
+    </div>
+    <div class="auth-quote"><span class="quote-mark" aria-hidden="true">“</span><p>완벽한 하루보다, 다시 돌아오는 하루가 중요하니까.</p><span>ON:GYEOL STUDY JOURNAL</span></div>
+    <span class="auth-orbit auth-orbit-one" aria-hidden="true"></span>
+    <span class="auth-orbit auth-orbit-two" aria-hidden="true"></span>
+    <span class="auth-grain" aria-hidden="true"></span>
+  </section>
+
+  <section class="auth-panel">
+    <div class="auth-panel-inner">
+      <span class="eyebrow auth-mobile-eyebrow">YOUR OWN STUDY RHYTHM</span>
+      <div class="auth-heading">
+        <span class="eyebrow">WELCOME TO ONGYEOL</span>
+        {% if mode == 'login' %}
+          <h2>다시 만나 반가워요.</h2><p>계정에 로그인하고 오늘의 기록을 이어가세요.</p>
+        {% else %}
+          <h2>새로운 리듬을 시작해요.</h2><p>회원가입하고 나만의 학습 흐름을 만들어 보세요.</p>
+        {% endif %}
+      </div>
+
+      <div class="auth-tabs" role="tablist" aria-label="계정 메뉴">
+        <a role="tab" aria-selected="{{ 'true' if mode == 'login' else 'false' }}" class="{% if mode == 'login' %}active{% endif %}" href="{{ url_for('login') }}">로그인</a>
+        <a role="tab" aria-selected="{{ 'true' if mode == 'register' else 'false' }}" class="{% if mode == 'register' %}active{% endif %}" href="{{ url_for('register') }}">회원가입</a>
+      </div>
+
+      <form class="auth-form" method="post" action="{{ url_for('login' if mode == 'login' else 'register') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {% if mode == 'register' %}
+        <label class="form-field"><span>이름</span><input type="text" name="display_name" value="{{ request.form.get('display_name', '') }}" placeholder="앱에서 사용할 이름" maxlength="40" autocomplete="nickname" required></label>
+        {% endif %}
+        <label class="form-field"><span>이메일</span><span class="auth-input-wrap"><span aria-hidden="true">✉</span><input type="email" name="email" value="{{ request.form.get('email', '') }}" placeholder="you@example.com" maxlength="254" autocomplete="email" required></span></label>
+        <label class="form-field"><span>비밀번호</span><span class="auth-input-wrap"><span aria-hidden="true">⌑</span><input type="password" name="password" placeholder="8자 이상 입력해 주세요" minlength="8" autocomplete="{{ 'current-password' if mode == 'login' else 'new-password' }}" required></span></label>
+        <button class="button button-primary auth-submit" type="submit">{{ '로그인' if mode == 'login' else '계정 만들기' }} <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="auth-footnote"><span aria-hidden="true">♧</span> 공부 기록은 기본적으로 나에게만 보여요.</p>
+      <p class="auth-copyright">차분히 쌓아가는 나의 공부 기록 <span>·</span> ON:GYEOL</p>
+    </div>
+  </section>
+</main>
+{% endblock %}

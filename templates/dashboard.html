@@ -1,0 +1,46 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="page-stack dashboard-page">
+  <section class="welcome-strip">
+    <div class="welcome-copy">
+      <span class="eyebrow welcome-kicker"><span aria-hidden="true">✳</span> ONE SMALL STEP, EVERY DAY</span>
+      <h2>안녕하세요, <em>{{ current_user['display_name'] }}</em>님.</h2>
+      <p>오늘의 집중도 언젠가 나를 이끄는 힘이 돼요.</p>
+    </div>
+    <a class="button button-primary welcome-add" href="{{ url_for('new_record') }}"><span aria-hidden="true">＋</span> 오늘 공부 기록하기</a>
+    <span class="welcome-ornament ornament-one" aria-hidden="true">✳</span><span class="welcome-ornament ornament-two" aria-hidden="true">❋</span>
+  </section>
+
+  <section class="dashboard-stat-grid" aria-label="학습 요약">
+    <article class="stat-card"><div class="stat-card-top"><span class="stat-icon stat-sage" aria-hidden="true">◷</span><span class="stat-label">TODAY</span><span class="stat-date">{{ today_iso|date_label }}</span></div><strong class="stat-big-number">{{ today_total|duration }}</strong><p>오늘 기록한 공부 시간</p><div class="inline-progress"><div class="progress-track"><span style="width: {{ today_percent }}%"></span></div><small>{{ today_percent }}% 달성</small></div></article>
+    <article class="stat-card"><div class="stat-card-top"><span class="stat-icon stat-clay" aria-hidden="true">▥</span><span class="stat-label">THIS WEEK</span><span class="stat-date">월요일부터 오늘까지</span></div><strong class="stat-big-number">{{ summary.total_minutes|duration }}</strong><p>이번 주에 쌓은 공부 시간</p><div class="inline-progress"><div class="progress-track progress-clay"><span style="width: {{ summary.progress_percent }}%"></span></div><small>{{ summary.progress_percent }}% 달성</small></div></article>
+    <article class="stat-card stat-goal-card"><div class="stat-card-top"><span class="stat-icon stat-gold" aria-hidden="true">✳</span><span class="stat-label">DAILY GOAL</span></div><div class="goal-stat-content"><div><strong class="stat-big-number goal-number">{{ current_user['daily_goal_minutes']|duration }}</strong><p>하루 학습 목표</p></div><span class="goal-ring" style="--progress: {{ today_percent }}" aria-label="하루 목표 {{ today_percent }}% 달성"><span>{{ today_percent }}<small>%</small></span></span></div></article>
+  </section>
+
+  <section class="dashboard-main-grid">
+    <article class="panel chart-panel">
+      <div class="panel-heading"><div><span class="eyebrow">YOUR WEEKLY RHYTHM</span><h2>이번 주의 학습 흐름</h2><p>{{ summary.week_title }}</p></div><span class="panel-heading-icon" aria-hidden="true">▥</span></div>
+      <div class="week-chart" aria-label="이번 주 요일별 공부 시간 막대 차트"><div class="chart-scale"><span>목표</span><span>0분</span></div><div class="chart-plot"><div class="chart-grid-lines"><span></span><span></span><span></span></div><div class="chart-goal-line" style="bottom: {{ summary.daily_goal_line_percent }}%"><span>주간 목표 기준</span></div><div class="chart-columns">{% for day in summary.days %}<a class="chart-column{% if day.is_today %} is-today{% endif %}" href="{{ url_for('new_record', date=day.date) }}" title="{{ day.date_label }} · {{ day.minutes|duration }} 기록 추가"><span class="chart-value">{{ day.minutes if day.minutes else '' }}{% if day.minutes %}분{% endif %}</span><span class="chart-bar-track"><span class="chart-bar{% if day.minutes >= current_user['daily_goal_minutes'] %} chart-bar-goal{% endif %}{% if day.is_today %} chart-bar-today{% endif %}" style="height: {{ day.bar_percent }}%"></span></span><span class="chart-day-label">{{ day.weekday }}</span><span class="chart-date-label">{{ day.date_label[3:] }}</span></a>{% endfor %}</div></div></div>
+      <div class="chart-footer"><span class="chart-legend"><i class="legend-dot"></i>학습 시간 <i class="legend-goal-line"></i> 하루 목표</span><a class="text-link" href="{{ url_for('report') }}">주간 리포트 <span aria-hidden="true">→</span></a></div>
+    </article>
+
+    <article class="panel today-goal-panel">
+      <div class="panel-heading goal-panel-heading"><div><span class="eyebrow">A GOAL THAT FITS YOU</span><h2>오늘의 목표</h2><p>나만의 속도로 채워 보세요.</p></div><span class="panel-heading-icon" aria-hidden="true">◷</span></div>
+      <div class="goal-progress-copy"><span>하루 목표 달성</span><strong>{{ today_total|duration }}</strong></div><div class="large-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ today_percent }}" aria-label="하루 학습 목표 진행률"><span style="width: {{ today_percent }}%"></span></div><div class="goal-progress-caption"><span>0시간</span><span>목표 {{ current_user['daily_goal_minutes']|duration }}</span></div>
+      {% if today_total >= current_user['daily_goal_minutes'] %}<div class="goal-message goal-complete"><span class="goal-message-icon">✓</span><p>오늘의 목표를 이뤘어요.<small>작은 약속을 지켜낸 스스로를 칭찬해 주세요.</small></p></div>{% else %}<div class="goal-message"><span class="goal-message-icon">✳</span><p>조금씩 채워가고 있어요.<small>목표까지 {{ (current_user['daily_goal_minutes'] - today_total)|duration }} 남았어요.</small></p></div>{% endif %}
+      <a class="button button-secondary goal-add-button" href="{{ url_for('new_record') }}"><span aria-hidden="true">＋</span> 공부 시간 더하기</a>
+    </article>
+  </section>
+
+  <section class="panel recent-panel">
+    <div class="panel-heading recent-panel-heading"><div><span class="eyebrow">LITTLE MOMENTS OF FOCUS</span><h2>최근 학습 기록</h2></div><a class="text-link" href="{{ url_for('records') }}">전체 기록 보기 <span aria-hidden="true">→</span></a></div>
+    {% if recent_records %}
+      <div class="record-list">{% for record in recent_records %}<article class="record-row"><span class="record-subject-icon subject-tone-{{ loop.index0 % 4 }}" aria-hidden="true">{% if loop.index0 % 4 == 0 %}▤{% elif loop.index0 % 4 == 1 %}✳{% elif loop.index0 % 4 == 2 %}◷{% else %}⌑{% endif %}</span><div class="record-row-main"><div class="record-row-heading"><h3>{{ record['subject'] }}</h3><time class="record-date" datetime="{{ record['study_date'] }}">{{ record['study_date']|date_label }}</time></div>{% if record['memo'] %}<p>{{ record['memo'] }}</p>{% else %}<p>오늘의 배움을 차곡차곡 기록했어요.</p>{% endif %}</div><span class="record-duration"><span aria-hidden="true">◷</span> {{ record['duration_minutes']|duration }}</span><a class="icon-button row-action" href="{{ url_for('edit_record', record_id=record['id']) }}" aria-label="{{ record['subject'] }} 기록 수정" title="수정">↗</a></article>{% endfor %}</div>
+    {% else %}
+      <div class="empty-state"><span class="empty-state-icon" aria-hidden="true">▤</span><strong>첫 공부 기록을 남겨 보세요.</strong><p>공부한 시간과 작은 메모가 이곳에 차곡차곡 쌓여요.</p><a class="button button-secondary empty-add-button" href="{{ url_for('new_record') }}">첫 기록 시작하기 <span aria-hidden="true">→</span></a></div>
+    {% endif %}
+  </section>
+  <section class="dashboard-note"><span aria-hidden="true">✳</span><p>꾸준함은 한 번의 완벽한 날이 아니라, 돌아오는 작은 선택에서 시작돼요.</p><a href="{{ url_for('settings') }}" aria-label="목표 설정으로 이동">↗</a></section>
+</div>
+{% endblock %}
