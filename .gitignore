@@ -1,0 +1,20 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Vercel local project configuration
+.vercel/
+
+# Python virtual environments and generated files
+.venv/
+venv/
+myenv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Flask secrets and legacy SQLite database
+instance/
