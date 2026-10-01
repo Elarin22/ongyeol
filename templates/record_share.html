@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% block content %}
+<div class="page-stack share-page">
+  <a class="back-link" href="{{ url_for('records') }}"><span aria-hidden="true">←</span> 전체 기록으로 돌아가기</a>
+  <section class="panel record-form-panel share-form-panel">
+    <div class="record-form-intro"><span class="record-form-icon">⇄</span><div><span class="eyebrow">SHARE ONLY WITH YOUR CHOICE</span><h2>이 기록을 함께 나눠요.</h2><p>친구를 직접 선택해야만 이 기록이 공유돼요.</p></div></div>
+    <div class="share-record-preview"><strong>{{ record['subject'] }}</strong><span>{{ record['study_date']|date_label }} · {{ record['duration_minutes']|duration }}</span>{% if record['memo'] %}<p>{{ record['memo'] }}</p>{% endif %}</div>
+    <form method="post" class="record-form share-friends-form"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      {% if friends %}<fieldset class="share-friends-list"><legend>공유할 공부 친구 선택</legend><p class="share-help">선택하지 않으면 기록은 본인만 볼 수 있어요. 친구 연결을 해제하면 해당 친구의 공유 기록 접근도 사라져요.</p>
+        {% for friend in friends %}<label class="share-friend-option"><input type="checkbox" name="friend_ids" value="{{ friend['id'] }}" {% if friend['id']|int in selected_friend_ids %}checked{% endif %}><span class="avatar">{{ friend['display_name'][:1] }}</span><span><strong>{{ friend['display_name'] }}</strong><small>공부 친구</small></span><span class="share-check">✓</span></label>{% endfor %}
+      </fieldset>{% else %}<div class="empty-state"><span class="empty-state-icon">♡</span><strong>공유할 공부 친구가 없어요.</strong><p>먼저 친구 화면에서 초대 링크를 보내고 친구 연결을 완료해 주세요.</p><a class="text-link" href="{{ url_for('friends') }}">공부 친구로 이동 →</a></div>{% endif %}
+      <div class="record-form-actions"><a class="button button-quiet" href="{{ url_for('records') }}">취소</a><button class="button button-primary" type="submit">공유 대상 저장</button></div>
+    </form>
+  </section>
+</div>
+{% endblock %}

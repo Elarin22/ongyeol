@@ -14,4 +14,10 @@ for import_path in (PROJECT_ROOT, FUNCTION_DIR):
     if str(import_path) not in sys.path:
         sys.path.insert(0, str(import_path))
 
-from app import app  # noqa: E402,F401
+from app import app  # noqa: E402
+from feature_routes import register_feature_routes  # noqa: E402
+
+# Keep feature routes available in both local and deployed entry points.
+register_feature_routes(app)
+
+__all__ = ["app"]

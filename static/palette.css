@@ -1,0 +1,274 @@
+/* Warm, refined brown palette with a slightly brighter, softer finish.
+   Loaded after component styles so the full interface uses one palette. */
+:root {
+  --canvas: #eee8df;
+  --paper: #f4efe7;
+  --raised: #f8f4ed;
+  --sidebar: #e6dcd0;
+  --forest: #84664d;
+  --forest-deep: #6d513d;
+  --forest-ink: #49392e;
+  --sage: #a18a73;
+  --sage-light: #eee5da;
+  --clay: #ad7658;
+  --ochre: #a98a5c;
+  --ink: #40372f;
+  --ink-soft: #675a4d;
+  --muted: #7b7167;
+  --line: #e2d9cd;
+  --line-strong: #d1c4b5;
+  --white: #fcf9f3;
+  --danger: #a4544e;
+  --shadow-soft: 0 8px 26px rgba(62, 45, 33, .05);
+  --shadow-card: 0 15px 44px rgba(62, 45, 33, .09);
+}
+
+body,
+.app-layout,
+.app-layout > .main-content {
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+.app-layout > .sidebar {
+  border-color: #d5c9ba;
+  background: var(--sidebar);
+}
+
+.nav-link.active {
+  background: #f3ede4;
+  color: var(--forest-deep);
+}
+.nav-link.active::before { background: var(--forest); }
+.nav-link:hover { color: var(--forest-deep); }
+.nav-icon,
+.nav-link.active .nav-icon { color: var(--sage); }
+.nav-badge { background: #f0e5d7; color: #806744; }
+
+.topbar {
+  border-color: #e0d6ca;
+  background: rgba(244, 239, 231, .96);
+}
+.topbar-title > span:last-child { color: var(--forest-ink); }
+.topbar-divider { background: #d1c4b5; }
+.topbar-icon,
+.mobile-menu-button {
+  border-color: #ddd1c3;
+  background: #f4efe7;
+  color: var(--forest);
+}
+.topbar-add,
+.button-primary {
+  border-color: var(--forest);
+  background: var(--forest);
+}
+.topbar-add:hover,
+.button-primary:hover {
+  border-color: var(--forest-deep);
+  background: var(--forest-deep);
+}
+.button-secondary {
+  border-color: #ddcdbb;
+  background: #f0e7dc;
+  color: var(--forest-deep);
+}
+.button-secondary:hover { background: #e9ddcf; }
+
+.panel,
+.stat-card,
+.report-stat-card {
+  border-color: #e0d7cc;
+  background: var(--raised);
+}
+.welcome-strip,
+.records-overview,
+.report-intro,
+.friends-hero {
+  border-color: #d9caba;
+  background: linear-gradient(112deg, #e9ded1 0%, #eee4d8 56%, #f0e7dc 100%);
+}
+.welcome-strip h2,
+.records-overview-copy h2,
+.report-intro-copy h2,
+.friends-hero-copy h2 { color: var(--forest-ink); }
+.welcome-strip h2 em,
+.report-intro-copy h2 em,
+.friends-hero-copy h2 em { color: #907052; }
+
+.brand-symbol,
+.avatar {
+  border-color: rgba(132, 102, 77, .22);
+  background: #eee2d4;
+  color: var(--forest);
+}
+.brand-copy strong,
+.panel-heading h2,
+.auth-heading h2,
+.record-form-intro h2,
+.stat-big-number,
+.report-stat-card > strong,
+.weekly-goal-number strong { color: var(--forest-ink); }
+
+.stat-sage,
+.report-stat-icon.sage,
+.record-form-icon,
+.empty-state-icon,
+.goal-message-icon,
+.dashboard-note > span {
+  background: #eee5da;
+  color: #74583e;
+}
+.stat-clay,
+.report-stat-icon.clay { background: #f2e4d9; color: #96684c; }
+.stat-gold,
+.report-stat-icon.gold { background: #f2eadb; color: #876e49; }
+.stat-mist,
+.report-stat-icon.mist { background: #eee5db; color: #74685a; }
+
+.progress-track,
+.large-progress-track { background: #e4dbd0; }
+.progress-track > span,
+.large-progress-track > span,
+.daily-breakdown-bar .progress-track > span {
+  background: linear-gradient(90deg, #8a6a4e, #b39779);
+}
+.goal-ring {
+  background: conic-gradient(#8a6a4e calc(var(--progress) * 1%), #e4dbd0 0);
+}
+.chart-bar {
+  border-color: #d4c0aa;
+  background: linear-gradient(180deg, #deccb8, #eee0cf);
+}
+.chart-bar-goal {
+  border-color: #b99d7f;
+  background: linear-gradient(180deg, #b99d7f, #dac8b1);
+}
+.chart-bar-today {
+  border-color: #795b42;
+  background: linear-gradient(180deg, #8a694c, #b29473);
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus,
+.auth-input-wrap:focus-within,
+.duration-input:focus-within,
+.goal-setting-input:focus-within {
+  border-color: #aa8c6d;
+  box-shadow: 0 0 0 3px rgba(132, 102, 77, .16);
+}
+.auth-story { background: #614a38; }
+.auth-story::before,
+.auth-story::after,
+.auth-orbit { border-color: rgba(242, 231, 215, .15); }
+.auth-story-copy h1 em { color: #e0c6a2; }
+.auth-kicker > span,
+.quote-mark { color: #d7b581; }
+.auth-panel { background: #f4eee5; }
+.auth-tabs { border-color: #e0d6ca; background: #ebe2d7; }
+.auth-tabs a.active { background: var(--raised); color: var(--forest-deep); }
+
+.flash-message {
+  border-color: #d3dfd4;
+  background: #eaf0e7;
+  color: #4d6650;
+}
+.flash-message.flash-info { border-color: #e1d4bd; background: #f3ecdf; color: #796340; }
+.flash-message.flash-error { border-color: #ead7d1; background: #f6ece8; color: #8f594f; }
+
+.study-status.status-completed { border-color: #d0ddcf; background: #e8efe5; color: #4c674e; }
+.study-status.status-progress { border-color: #e2d6c2; background: #f3eddf; color: #806946; }
+.share-friend-option:has(input:checked) {
+  border-color: #b9a083;
+  background: #f1e8dc;
+}
+.share-friend-option:has(input:checked) .share-check { background: #e7d8c6; color: #674d38; }
+.share-friend-option > input { accent-color: var(--forest); }
+
+@media (max-width: 760px) {
+  .app-layout > .sidebar { box-shadow: 18px 0 42px rgba(50, 37, 28, .18); }
+  .app-layout > .sidebar-backdrop { background: rgba(43, 32, 25, .42); }
+}
+
+/* Readability pass: lift the smallest labels and supporting copy while
+   preserving larger headings, figures, and decorative icon sizes. */
+body.app-body :is(.eyebrow, .sidebar-label, .nav-link, .sidebar-date,
+  .sidebar-date-caption, .privacy-note p, .user-copy strong, .user-copy small,
+  .topbar-title, .topbar-date, .topbar-add, .button, .text-link, .site-footer,
+  .panel-heading p, .flash-message, .stat-label, .stat-date, .stat-card > p,
+  .goal-stat-content p, .inline-progress small, .chart-scale, .chart-value,
+  .chart-day-label, .chart-date-label, .chart-legend, .goal-progress-copy > span,
+  .goal-progress-caption, .goal-message p, .goal-message p small,
+  .dashboard-note p, .record-row-heading h3, .record-date, .record-row-main > p,
+  .record-duration, .records-totals > span, .record-search input, .filter-tabs a,
+  .records-period-note, .form-field, .form-field input, .form-field textarea,
+  .form-field select, .form-field em, .form-field small, .record-form-intro p,
+  .form-kind-note p, .report-intro-copy p, .week-switcher strong,
+  .week-range-year, .current-week-link, .report-stat-label,
+  .report-stat-card > small, .report-stat-card > strong > small,
+  .daily-breakdown-date > span, .daily-breakdown-date > strong,
+  .daily-breakdown-time, .daily-breakdown-bar > small, .weekly-goal-number span,
+  .weekly-goal-note p, .weekly-goal-note p small, .weekly-goal-foot,
+  .report-encouragement p, .report-encouragement a, .friends-hero-copy p,
+  .study-status, .record-status-select, .share-record-preview > span,
+  .share-record-preview p, .share-help, .share-friend-option strong,
+  .share-friend-option small, .security-caution, .settings-card-heading p,
+  .settings-intro p, .settings-actions > span, .settings-privacy-note small,
+  .reminder-setting-row small, .notification-row-title strong,
+  .notification-row-content > p, .notification-info p, .invite-explainer p,
+  .invite-explainer small, .friend-row > div strong, .friend-row > div small,
+  .invite-row > div strong, .invite-status-pill, .privacy-card > p) {
+  font-size: 12px !important;
+}
+
+body.app-body :is(.nav-link, .button, .topbar-add, .filter-tabs a,
+  .form-field, .study-status, .record-status-select, .share-friend-option strong,
+  .notification-row-title strong, .friend-row > div strong, .invite-row > div strong) {
+  font-size: 13px !important;
+}
+
+body.app-body :is(.form-field input, .form-field textarea, .form-field select,
+  .record-search input) {
+  font-size: 14px !important;
+}
+
+body.app-body :is(.panel-heading h2, .settings-intro h2, .settings-card-heading h2) {
+  font-size: 20px;
+}
+
+body.auth-body :is(.auth-kicker, .auth-quote p, .auth-tabs a, .form-field,
+  .form-field input, .form-field textarea, .form-field select, .form-field small,
+  .auth-footnote, .auth-copyright, .auth-heading p) {
+  font-size: 12px !important;
+}
+
+body.auth-body :is(.form-field, .auth-tabs a) { font-size: 13px !important; }
+body.auth-body :is(.form-field input, .form-field textarea, .form-field select) {
+  font-size: 14px !important;
+}
+body.auth-body .auth-story-copy p { font-size: 15px; }
+body.auth-body .auth-heading h2 { font-size: 29px; }
+
+@media (max-width: 760px) {
+  body.app-body :is(.eyebrow, .sidebar-label, .sidebar-date-caption,
+    .topbar-date, .site-footer, .chart-scale, .chart-value, .chart-date-label,
+    .records-period-note, .form-field em, .report-stat-label,
+    .report-stat-card > small, .daily-breakdown-bar > small,
+    .week-range-year, .current-week-link) {
+    font-size: 11px !important;
+  }
+  body.app-body :is(.nav-link, .panel-heading p, .stat-label, .stat-date,
+    .record-row-main > p, .record-date, .form-field, .form-field small,
+    .notification-row-content > p, .invite-explainer small) {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body.auth-body :is(.auth-kicker, .auth-tabs a, .form-field, .form-field small,
+    .auth-footnote, .auth-copyright) { font-size: 12px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

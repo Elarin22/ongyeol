@@ -939,6 +939,14 @@ def not_found(_error: Any) -> tuple[str, int]:
 
 
 if __name__ == "__main__":
+    # When started as `python app.py`, expose this running module under the
+    # import name used by feature_routes to avoid creating a second Flask app.
+    import sys
+
+    sys.modules["app"] = sys.modules[__name__]
+    from feature_routes import register_feature_routes
+
+    register_feature_routes(app)
     app.run(
         host="127.0.0.1", port=int(os.environ.get("PORT", "5000")),
         debug=os.environ.get("FLASK_DEBUG") == "1",

@@ -10,6 +10,7 @@
       <label class="form-field"><span>공부한 날짜 <em>필수</em></span><input type="date" name="study_date" value="{{ values['study_date'] }}" required></label>
       <label class="form-field"><span>과목 또는 학습 내용 <em>필수</em></span><input type="text" name="subject" value="{{ values['subject'] }}" maxlength="80" placeholder="예: 수학 · 수열 문제 풀이" required></label>
       <label class="form-field"><span>공부 시간 <em>분 단위로 입력해 주세요</em></span><span class="duration-input"><input type="number" name="duration_minutes" min="1" max="1440" step="1" value="{{ values['duration_minutes'] }}" required><span>분</span></span><small>1분부터 24시간까지 기록할 수 있어요. 예: 1시간 30분은 90분</small></label>
+      <label class="form-field"><span>공부 상태</span><select name="study_status"><option value="in_progress" {% if values.get('study_status', 'completed') == 'in_progress' %}selected{% endif %}>진행 중</option><option value="completed" {% if values.get('study_status', 'completed') == 'completed' %}selected{% endif %}>공부 완료</option></select><small>기록별 상태는 언제든 수정할 수 있어요.</small></label>
       <label class="form-field"><span>메모 <em>선택 사항</em></span><textarea name="memo" maxlength="500" rows="4" placeholder="오늘 배운 점이나 다음에 이어서 할 일을 적어 보세요.">{{ values['memo'] }}</textarea><small>500자 이내로 기록할 수 있어요.</small></label>
       <div class="record-form-actions"><a class="button button-quiet" href="{{ url_for('records') }}">취소</a><button class="button button-primary" type="submit">{{ '변경 사항 저장' if record else '공부 기록 저장' }} <span aria-hidden="true">→</span></button></div>
     </form>
