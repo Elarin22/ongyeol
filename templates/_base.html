@@ -19,10 +19,7 @@
   {% if current_user %}
     <div class="app-layout">
       <aside class="sidebar" id="sidebar">
-        <a class="brand" href="{{ url_for('dashboard') }}" aria-label="온결 대시보드">
-          <span class="brand-symbol" aria-hidden="true">온</span>
-          <span class="brand-copy"><strong>온결<span>.</span></strong><small>STUDY JOURNAL</small></span>
-        </a>
+        <a class="brand" href="{{ url_for('dashboard') }}" aria-label="온결 대시보드"><span class="brand-symbol" aria-hidden="true">온</span><span class="brand-copy"><strong>온결<span>.</span></strong><small>STUDY JOURNAL</small></span></a>
         <span class="sidebar-label">나의 학습</span>
         <nav class="main-nav" aria-label="주 메뉴">
           <a class="nav-link{% if request.endpoint == 'dashboard' %} active{% endif %}" href="{{ url_for('dashboard') }}"><span class="nav-icon" aria-hidden="true">⌂</span><span>오늘의 기록</span></a>
@@ -31,9 +28,9 @@
         </nav>
         <span class="sidebar-label sidebar-label-community">함께 응원해요</span>
         <nav class="main-nav" aria-label="커뮤니티 메뉴">
-          <a class="nav-link{% if request.endpoint == 'friends' %} active{% endif %}" href="{{ url_for('friends') }}"><span class="nav-icon" aria-hidden="true">♡</span><span>공부 친구</span></a>
+          <a class="nav-link{% if request.endpoint in ['friends', 'remove_study_friend'] %} active{% endif %}" href="{{ url_for('friends') }}"><span class="nav-icon" aria-hidden="true">♡</span><span>공부 친구</span></a>
           <a class="nav-link{% if request.endpoint == 'notifications' %} active{% endif %}" href="{{ url_for('notifications') }}"><span class="nav-icon" aria-hidden="true">♧</span><span>알림</span>{% if unread_count %}<span class="nav-badge">{{ unread_count }}</span>{% endif %}</a>
-          <a class="nav-link{% if request.endpoint == 'shared_records' %} active{% endif %}" href="{{ url_for('shared_records') }}"><span class="nav-icon" aria-hidden="true">⇄</span><span>공유 기록</span></a>
+          <a class="nav-link{% if request.endpoint in ['shared_records', 'sent_shared_records', 'remove_record_share'] %} active{% endif %}" href="{{ url_for('shared_records') }}"><span class="nav-icon" aria-hidden="true">⇄</span><span>공유 기록</span></a>
         </nav>
         <div class="sidebar-bottom">
           <a class="nav-link{% if request.endpoint == 'settings' %} active{% endif %}" href="{{ url_for('settings') }}"><span class="nav-icon" aria-hidden="true">⚙</span><span>설정</span></a>

@@ -383,6 +383,36 @@ body.app-body {
   text-align: right;
 }
 
+.mobile-menu-button {
+  display: none;
+}
+
+.content-wrap {
+  width: min(100%, 1270px);
+  flex: 1 0 auto;
+  align-self: center;
+  padding: 27px clamp(24px, 4vw, 56px) 30px;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 23px;
+  padding: 0 2px 3px;
+  color: #989a91;
+  font-size: 8px;
+}
+
+.site-footer span:first-child {
+  font-weight: 600;
+  letter-spacing: .12em;
+}
+
+.site-footer span:last-child {
+  text-align: right;
+}
+
 @media (max-width: 980px) and (min-width: 761px) {
   .app-layout {
     grid-template-columns: 220px minmax(0, 1fr);
@@ -556,4 +586,33 @@ body.app-body {
   .topbar-add {
     transition-duration: .01ms;
   }
+}
+
+/* Friend removal, share history, and share revocation. */
+.friend-row { gap: 12px; }
+.friend-remove-form, .sent-share-revoke { flex: 0 0 auto; margin: 0 0 0 auto; }
+.friend-remove-button { min-height: 31px; padding: 0 11px; border: 1px solid #e8d7cf; border-radius: 7px; background: #f8eeea; color: #986352; cursor: pointer; font: inherit; font-size: 9px; font-weight: 600; }
+.friend-remove-button:hover { border-color: #d8b8a9; background: #f3e5df; color: #824f40; }
+.friend-connected { margin-left: auto; }
+.sharing-tabs { display: flex; gap: 7px; border-bottom: 1px solid var(--line-strong); }
+.sharing-tabs a { padding: 9px 13px; border-bottom: 2px solid transparent; color: var(--muted); font-size: 11px; text-decoration: none; }
+.sharing-tabs a:hover { color: var(--forest); }
+.sharing-tabs a.active { border-bottom-color: var(--forest); color: var(--forest-deep); font-weight: 700; }
+.sent-share-row { flex-wrap: wrap; }
+.sent-share-row .record-row-main { min-width: 130px; }
+.sent-share-friend { color: var(--forest-deep); font-weight: 700; }
+.sent-share-revoke .button { min-height: 30px; padding: 0 9px; color: var(--danger); font-size: 8px; }
+.sent-share-revoke .button:hover { background: #f6ebe7; }
+
+@media (max-width: 760px) {
+  .friend-row { flex-wrap: wrap; }
+  .friend-connected { margin-left: auto; }
+  .friend-remove-form { margin-left: 0; }
+}
+@media (max-width: 480px) {
+  .friend-remove-button { min-height: 28px; padding: 0 8px; font-size: 8px; }
+  .sharing-tabs a { padding: 8px 9px; font-size: 9px; }
+  .sent-share-row { gap: 7px; }
+  .sent-share-row .record-row-main { flex-basis: calc(100% - 55px); }
+  .sent-share-revoke { width: 100%; margin-left: 40px; }
 }

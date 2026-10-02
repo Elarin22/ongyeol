@@ -16,8 +16,10 @@ for import_path in (PROJECT_ROOT, FUNCTION_DIR):
 
 from app import app  # noqa: E402
 from feature_routes import register_feature_routes  # noqa: E402
+from account_security_routes import register_account_security_routes  # noqa: E402
 
 # Keep feature routes available in both local and deployed entry points.
 register_feature_routes(app)
+register_account_security_routes(app)
 
 __all__ = ["app"]

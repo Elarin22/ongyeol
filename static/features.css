@@ -1,25 +1,11 @@
-/* Quiet, premium palette and styling for the account and sharing additions. */
+/* Refined warm brown components for privacy, friends, and sharing. */
 :root {
-  --canvas: #efeee8;
-  --paper: #f7f6f1;
-  --raised: #faf9f5;
-  --sidebar: #e7e5dc;
-  --forest: #43584c;
-  --forest-deep: #35483d;
-  --forest-ink: #2d4035;
-  --sage: #7c9184;
-  --sage-light: #e6ebe5;
-  --clay: #9d725f;
-  --ochre: #ad9064;
-  --ink: #303b34;
-  --ink-soft: #58645b;
-  --muted: #82857d;
-  --line: #e2e0d7;
-  --line-strong: #d5d3c9;
-  --white: #fcfbf7;
-  --danger: #9b574c;
+  --canvas: #efeee8; --paper: #f7f6f1; --raised: #faf9f5; --sidebar: #e7e5dc;
+  --forest: #84664d; --forest-deep: #6d513d; --forest-ink: #49392e;
+  --sage: #a18a73; --sage-light: #eee5da; --clay: #ad7658; --ochre: #a98a5c;
+  --ink: #40372f; --ink-soft: #675a4d; --muted: #7b7167; --line: #e2d9cd;
+  --line-strong: #d1c4b5; --white: #fcf9f3; --danger: #a4544e;
 }
-
 .settings-feature-form { display: flex; flex-direction: column; gap: 16px; }
 .settings-feature-form .form-field { max-width: 100%; }
 .feature-form-actions { display: flex; justify-content: flex-end; padding-top: 14px; border-top: 1px solid var(--line); }
@@ -27,46 +13,64 @@
 .button-danger:hover { border-color: #8e4f44; background: #8e4f44; }
 .danger-zone { border-color: #e8dcd6; }
 .danger-zone .settings-section-icon.danger { background: #f3e7e1; color: var(--danger); }
-.security-caution { margin: 0; color: #8d756b; font-size: 10px; line-height: 1.7; }
-
-.study-status { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 5px; padding: 5px 8px; border: 1px solid transparent; border-radius: 999px; font-size: 8px; font-weight: 600; white-space: nowrap; }
-.study-status::before { width: 5px; height: 5px; border-radius: 50%; background: currentColor; content: ''; }
-.status-completed { border-color: #dce5d9; background: #edf2ea; color: #56725b; }
-.status-progress { border-color: #e7e1d3; background: #f2efe5; color: #8a7855; }
-.record-status-form { margin: 0; }
-.record-status-select { max-width: 115px; height: 30px; padding: 0 6px; border: 1px solid #e3e0d7; border-radius: 7px; background: var(--raised); color: #647166; font-size: 8px; }
-
-.records-overview.shared-overview { align-items: center; min-height: 124px; background: linear-gradient(112deg, #e8e9e1, #e4e9e5 60%, #e7e8df); }
-.shared-overview-icon { display: grid; width: 52px; height: 52px; flex: 0 0 auto; place-items: center; border: 1px solid #d5ded7; border-radius: 17px; background: rgba(250,250,245,.52); color: #6c8273; font-size: 24px; }
-.share-record-preview { display: flex; flex-direction: column; gap: 6px; margin: 19px 0 0; padding: 14px 15px; border: 1px solid #e9e7df; border-radius: 10px; background: #f5f4ee; }
-.share-record-preview strong { color: var(--forest-ink); font-family: 'Noto Serif KR', serif; font-size: 13px; }
-.share-record-preview > span { color: #858980; font-size: 9px; }
-.share-record-preview p { margin: 0; color: #70766e; font-size: 9px; line-height: 1.6; }
-.share-friends-form { padding-top: 15px; }
-.share-friends-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; border: 0; }
-.share-friends-list legend { margin-bottom: 5px; color: #4c5e51; font-size: 11px; font-weight: 700; }
-.share-help { margin: 0 0 5px; color: #898c83; font-size: 9px; line-height: 1.7; }
-.share-friend-option { display: flex; min-height: 58px; align-items: center; gap: 11px; padding: 9px 12px; border: 1px solid #e8e6de; border-radius: 10px; background: #fbfaf7; cursor: pointer; }
-.share-friend-option:has(input:checked) { border-color: #a8b7a7; background: #eff2eb; }
-.share-friend-option > input { width: 16px; height: 16px; accent-color: #526c59; }
-.share-friend-option .avatar { width: 34px; height: 34px; }
-.share-friend-option > span:nth-of-type(2) { display: flex; flex: 1; flex-direction: column; gap: 3px; }
-.share-friend-option strong { color: #4a584d; font-size: 10px; }
-.share-friend-option small { color: #94968e; font-size: 8px; }
-.share-check { display: grid; width: 22px; height: 22px; place-items: center; border-radius: 7px; background: #dfe8dc; color: #57715b; font-size: 11px; opacity: 0; }
+.security-caution { margin: 0; color: #8d756b; font-size: 12px; line-height: 1.7; }
+.study-status { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 5px; padding: 5px 8px; border: 1px solid transparent; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.study-status::before { width: 6px; height: 6px; border-radius: 50%; background: currentColor; content: ''; }
+.status-completed { border-color: #d0ddcf; background: #e8efe5; color: #4c674e; }
+.status-progress { border-color: #e2d6c2; background: #f3eddf; color: #806946; }
+.records-overview.shared-overview { align-items: center; min-height: 124px; background: linear-gradient(112deg, #e9ded1 0%, #eee4d8 56%, #f0e7dc 100%); }
+.shared-overview-icon { display: grid; width: 52px; height: 52px; flex: 0 0 auto; place-items: center; border: 1px solid #ddcdbb; border-radius: 17px; background: rgba(250,249,245,.68); color: #84664d; font-size: 24px; }
+.share-record-preview { display: flex; flex-direction: column; gap: 7px; margin: 19px 0 0; padding: 15px; border: 1px solid #e9e1d7; border-radius: 10px; background: #f5f0e8; }
+.share-record-preview strong { color: #49392e; font-size: 16px; }
+.share-record-preview > span { color: #70645a; font-size: 13px; }
+.share-record-preview p { margin: 0; color: #62584f; font-size: 13px; line-height: 1.65; }
+.share-friends-form { padding-top: 18px; }
+.share-friends-list { display: flex; flex-direction: column; gap: 9px; margin: 0; padding: 0; border: 0; }
+.share-friends-list legend { margin-bottom: 6px; color: #5e4938; font-size: 15px; font-weight: 700; }
+.share-help { margin: 0 0 7px; color: #71675d; font-size: 13px; line-height: 1.65; }
+.share-friend-option { display: flex; min-height: 62px; align-items: center; gap: 12px; padding: 10px 13px; border: 1px solid #e8e1d7; border-radius: 10px; background: #fbfaf7; cursor: pointer; }
+.share-friend-option:has(input:checked) { border-color: #b9a083; background: #f1e8dc; }
+.share-friend-option > input { width: 18px; height: 18px; accent-color: #84664d; }
+.share-friend-option .avatar { width: 36px; height: 36px; }
+.share-friend-option > span:nth-of-type(2) { display: flex; flex: 1; flex-direction: column; gap: 4px; }
+.share-friend-option strong { color: #5e4938; font-size: 14px; }
+.share-friend-option small { color: #777168; font-size: 12px; }
+.share-check { display: grid; width: 24px; height: 24px; place-items: center; border-radius: 7px; background: #e7d8c6; color: #674d38; font-size: 13px; opacity: 0; }
 .share-friend-option:has(input:checked) .share-check { opacity: 1; }
 .shared-record-row { flex-wrap: wrap; }
-.shared-record-row .record-row-main { min-width: 130px; }
+.shared-record-row .record-row-main { min-width: 150px; }
 .shared-record-row .record-row-main > p { white-space: normal; }
-
+.sharing-tabs { display: flex; gap: 8px; border-bottom: 1px solid #d1c4b5; }
+.sharing-tabs a { display: inline-flex; min-height: 46px; align-items: center; padding: 0 16px; border-bottom: 2px solid transparent; color: #675a4d; text-decoration: none; font-size: 14px; font-weight: 600; }
+.sharing-tabs a:hover { color: #6d513d; }
+.sharing-tabs a.active { border-bottom-color: #84664d; color: #6d513d; }
+.sent-share-row { gap: 14px; }
+.sent-share-row .record-row-main { min-width: 180px; }
+.sent-share-row .record-row-main > p { margin-top: 7px; color: #675a4d; font-size: 13px; }
+.sent-share-friend { color: #6d513d; font-weight: 700; }
+.sent-share-revoke { margin-left: auto; }
+.sent-share-revoke .button { min-height: 38px; padding: 0 13px; font-size: 12px; }
+.friend-row { display: flex; align-items: center; gap: 13px; }
+.friend-row > div { min-width: 0; flex: 1; }
+.friend-row > div strong, .friend-row > div small { display: block; }
+.friend-row > div small { margin-top: 4px; color: #7b7167; font-size: 12px; }
+.friend-remove-form { margin: 0 0 0 6px; }
+.friend-remove-button { min-height: 38px; padding: 0 13px; border: 1px solid #e5d8d2; border-radius: 8px; background: #faf5f2; color: #925b4f; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+.friend-remove-button:hover { border-color: #c9a99d; background: #f4e9e3; }
 @media (max-width: 760px) {
-  .study-status { padding: 4px 6px; font-size: 7px; }
-  .record-status-select { max-width: 92px; font-size: 7px; }
-  .share-friend-option { gap: 7px; padding: 8px; }
+ .study-status { padding: 5px 7px; font-size: 10px; }
+ .share-friend-option { gap: 8px; padding: 9px; }
+ .sent-share-row .record-row-main { min-width: 135px; }
+ .sent-share-revoke { margin-left: 0; }
 }
 @media (max-width: 480px) {
-  .feature-form-actions .button { width: 100%; }
-  .shared-overview-icon { width: 40px; height: 40px; font-size: 19px; }
-  .study-status { order: 3; }
-  .shared-record-row .record-row-main { flex-basis: calc(100% - 55px); }
+ .feature-form-actions .button { width: 100%; }
+ .shared-overview-icon { width: 42px; height: 42px; font-size: 20px; }
+ .study-status { order: 3; }
+ .shared-record-row .record-row-main { flex-basis: calc(100% - 55px); }
+ .sharing-tabs a { flex: 1; justify-content: center; padding: 0 8px; font-size: 13px; text-align: center; }
+ .friend-row { flex-wrap: wrap; }
+ .friend-connected { margin-left: auto; }
+ .friend-remove-form { margin-left: auto; }
+ .sent-share-row .record-row-main { flex-basis: calc(100% - 55px); }
 }
